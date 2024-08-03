@@ -1,9 +1,10 @@
 defaultNamespace: default
-targets:
+targetCustomizations:
   - name: all-clusters
     clusterSelector: {}
-    vars:
-      CLUSTER_ID: "{{ .ClusterLabels.cluster-id }}"
-      ENVIRONMENT: "{{ .ClusterLabels.environment }}"
-      REGION: "{{ .ClusterLabels.region }}"
-
+    values:
+      CLUSTER_ID: "${ .ClusterLabels.cluster-id }"
+      ENVIRONMENT: "${ .ClusterLabels.environment }"
+      REGION: "${ .ClusterLabels.region }"
+    templates:
+      - path: configmap.yaml  # Templating configmap.yaml to inject dynamic values
