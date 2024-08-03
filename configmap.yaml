@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-vars
+data:
+  CLUSTER_ID: "${ .ClusterLabels.cluster-id }"
+  ENVIRONMENT: "${ .ClusterLabels.environment }"
+  REGION: "${ .ClusterLabels.region }"
