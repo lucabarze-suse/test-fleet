@@ -1,8 +1,8 @@
 defaultNamespace: default
-targetCustomizations:
-  - name: all-clusters
-    clusterSelector: {}
-    helm:
-      values:
-        # Dynamic value taken from cluster labels
-        CLUSTER_DISPLAY_NAME: "${{ get .ClusterLabels 'management.cattle.io/cluster-display-name' }}"
+helm:
+  chart: ./fleet-helm-chart
+  releaseName: my-fleet-release
+  version: "0.1.0"
+  values:
+    env:
+      CLUSTER_DISPLAY_NAME: "${ .ClusterLabels['management.cattle.io/cluster-display-name'] }"
