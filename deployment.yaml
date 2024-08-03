@@ -4,6 +4,7 @@ metadata:
   name: env-test
   labels:
     app: env-test
+  annotations:
     cluster-id: "{{ .Vars.CLUSTER_ID }}"  # Enclose the variable in quotes
     environment: "{{ .Vars.ENVIRONMENT }}"  # Enclose the variable in quotes
     region: "{{ .Vars.REGION }}"  # Enclose the variable in quotes
