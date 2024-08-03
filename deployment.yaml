@@ -21,13 +21,16 @@ spec:
         env:
         - name: CLUSTER_ID
           valueFrom:
-            fieldRef:
-              fieldPath: metadata.annotations['helm.sh/resource-policy']
+            configMapKeyRef:
+              name: env-vars
+              key: CLUSTER_ID
         - name: ENVIRONMENT
           valueFrom:
-            fieldRef:
-              fieldPath: metadata.annotations['helm.sh/resource-policy']
+            configMapKeyRef:
+              name: env-vars
+              key: ENVIRONMENT
         - name: REGION
           valueFrom:
-            fieldRef:
-              fieldPath: metadata.annotations['helm.sh/resource-policy']
+            configMapKeyRef:
+              name: env-vars
+              key: REGION
