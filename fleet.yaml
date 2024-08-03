@@ -2,5 +2,7 @@ defaultNamespace: default
 targetCustomizations:
   - name: all-clusters
     clusterSelector: {}
-    values:
-      CLUSTER_ID: ${ get .ClusterLabels global.fleet.clusterLabels.management.cattle.io/cluster-name }
+    helm:
+      values:
+        # Dynamic value taken from cluster labels
+        CLUSTER_DISPLAY_NAME: "${ get .ClusterLabels 'management.cattle.io/cluster-display-name' }"
