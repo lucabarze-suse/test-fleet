@@ -19,5 +19,8 @@ spec:
         image: busybox
         command: ["sh", "-c", "echo Printing environment variables && env && sleep 3600"]
         env:
-        - name: CLUSTER_ID
-          value: ${ get .ClusterLabels "management.cattle.io/cluster-display-name" }
+        - name: CLUSTER_DISPLAY_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: cluster-info
+              key: clusterDisplayName
