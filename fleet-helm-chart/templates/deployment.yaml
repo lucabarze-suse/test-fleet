@@ -21,4 +21,4 @@ spec:
         command: ["sh", "-c", "echo Printing environment variables && env && sleep 3600"]
         env:
         - name: CLUSTER_DISPLAY_NAME
-          value: {{ .location }}
+          value: {{ .Values.location }}
