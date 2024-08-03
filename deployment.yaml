@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: env-test
   labels:
-    app: env-test  # Static labels only
+    app: env-test
 spec:
   replicas: 1
   selector:
@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: env-test  # Static labels only
+        app: env-test
     spec:
       containers:
       - name: busybox
@@ -20,8 +20,14 @@ spec:
         command: ["sh", "-c", "echo Printing environment variables && env && sleep 3600"]
         env:
         - name: CLUSTER_ID
-          value: "{{ .Vars.CLUSTER_ID }}"  # Dynamic substitution
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['helm.sh/resource-policy']
         - name: ENVIRONMENT
-          value: "{{ .Vars.ENVIRONMENT }}"  # Dynamic substitution
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['helm.sh/resource-policy']
         - name: REGION
-          value: "{{ .Vars.REGION }}"  # Dynamic substitution
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['helm.sh/resource-policy']
