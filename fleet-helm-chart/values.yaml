@@ -9,5 +9,4 @@ image:
   pullPolicy: IfNotPresent
 
 # Default environment variable values
-env:
-  CLUSTER_DISPLAY_NAME: "Default Name"
+location: "Default"
