@@ -1,0 +1,13 @@
+# Default values for fleet-helm-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+image:
+  repository: busybox
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Default environment variable values
+env:
+  CLUSTER_DISPLAY_NAME: "Default Name"
