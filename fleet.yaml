@@ -3,4 +3,4 @@ targetCustomizations:
   - name: all-clusters
     clusterSelector: {}
     values:
-      CLUSTER_ID: "${global.fleet.clusterLabels.cluster-id}"
+      CLUSTER_ID: ${ get .ClusterLabels global.fleet.clusterLabels.management.cattle.io/cluster-name }
