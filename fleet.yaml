@@ -5,4 +5,4 @@ targetCustomizations:
     helm:
       values:
         # Dynamic value taken from cluster labels
-        CLUSTER_DISPLAY_NAME: "${ get .ClusterLabels 'management.cattle.io/cluster-display-name' }"
+        CLUSTER_DISPLAY_NAME: "${{ get .ClusterLabels 'management.cattle.io/cluster-display-name' }}"
