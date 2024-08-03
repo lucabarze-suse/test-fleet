@@ -1,26 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: env-test
+  name: {{ .Release.Name }}-deployment
   labels:
-    app: env-test
+    app: {{ .Release.Name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: env-test
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: env-test
+        app: {{ .Release.Name }}
     spec:
       containers:
       - name: busybox
-        image: busybox
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         command: ["sh", "-c", "echo Printing environment variables && env && sleep 3600"]
         env:
         - name: CLUSTER_DISPLAY_NAME
           valueFrom:
             configMapKeyRef:
-              name: cluster-info
+              name: {{ .Release.Name }}-config
               key: clusterDisplayName
