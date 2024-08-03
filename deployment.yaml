@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: env-test
+  labels:
+    app: env-test
+    cluster-id: {{ .Vars.CLUSTER_ID }}
+    environment: {{ .Vars.ENVIRONMENT }}
+    region: {{ .Vars.REGION }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: env-test
+  template:
+    metadata:
+      labels:
+        app: env-test
+        environment: {{ .Vars.ENVIRONMENT }}
+        region: {{ .Vars.REGION }}
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["sh", "-c", "env && sleep 3600"]
+        env:
+        - name: CLUSTER_ID
+          value: {{ .Vars.CLUSTER_ID }}
+        - name: ENVIRONMENT
+          value: {{ .Vars.ENVIRONMENT }}
+        - name: REGION
+          value: {{ .Vars.REGION }}
+

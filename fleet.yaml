@@ -1,0 +1,9 @@
+defaultNamespace: default
+targets:
+  - name: all-clusters
+    clusterSelector: {}
+    vars:
+      CLUSTER_ID: "{{ .ClusterLabels.cluster-id }}"
+      ENVIRONMENT: "{{ .ClusterLabels.environment }}"
+      REGION: "{{ .ClusterLabels.region }}"
+
