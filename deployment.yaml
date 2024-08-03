@@ -20,17 +20,4 @@ spec:
         command: ["sh", "-c", "echo Printing environment variables && env && sleep 3600"]
         env:
         - name: CLUSTER_ID
-          valueFrom:
-            configMapKeyRef:
-              name: env-vars
-              key: CLUSTER_ID
-        - name: ENVIRONMENT
-          valueFrom:
-            configMapKeyRef:
-              name: env-vars
-              key: ENVIRONMENT
-        - name: REGION
-          valueFrom:
-            configMapKeyRef:
-              name: env-vars
-              key: REGION
+          value: ${ get .ClusterLabels "management.cattle.io/cluster-display-name" }
