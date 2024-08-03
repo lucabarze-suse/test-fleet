@@ -3,11 +3,7 @@ kind: Deployment
 metadata:
   name: env-test
   labels:
-    app: env-test
-  annotations:
-    cluster-id: "{{ .Vars.CLUSTER_ID }}"  # Enclose the variable in quotes
-    environment: "{{ .Vars.ENVIRONMENT }}"  # Enclose the variable in quotes
-    region: "{{ .Vars.REGION }}"  # Enclose the variable in quotes
+    app: env-test  # Static labels only
 spec:
   replicas: 1
   selector:
@@ -16,19 +12,16 @@ spec:
   template:
     metadata:
       labels:
-        app: env-test
-      annotations:
-        environment: "{{ .Vars.ENVIRONMENT }}"  # Enclose the variable in quotes
-        region: "{{ .Vars.REGION }}"  # Enclose the variable in quotes
+        app: env-test  # Static labels only
     spec:
       containers:
       - name: busybox
         image: busybox
-        command: ["sh", "-c", "env && sleep 3600"]
+        command: ["sh", "-c", "echo Printing environment variables && env && sleep 3600"]
         env:
         - name: CLUSTER_ID
-          value: "{{ .Vars.CLUSTER_ID }}"  # Enclose the variable in quotes
+          value: "{{ .Vars.CLUSTER_ID }}"  # Dynamic substitution
         - name: ENVIRONMENT
-          value: "{{ .Vars.ENVIRONMENT }}"  # Enclose the variable in quotes
+          value: "{{ .Vars.ENVIRONMENT }}"  # Dynamic substitution
         - name: REGION
-          value: "{{ .Vars.REGION }}"  # Enclose the variable in quotes
+          value: "{{ .Vars.REGION }}"  # Dynamic substitution
