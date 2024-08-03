@@ -17,6 +17,7 @@ spec:
     metadata:
       labels:
         app: env-test
+      annotations:
         environment: "{{ .Vars.ENVIRONMENT }}"  # Enclose the variable in quotes
         region: "{{ .Vars.REGION }}"  # Enclose the variable in quotes
     spec:
