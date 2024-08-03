@@ -21,7 +21,4 @@ spec:
         command: ["sh", "-c", "echo Printing environment variables && env && sleep 3600"]
         env:
         - name: CLUSTER_DISPLAY_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Release.Name }}-config
-              key: clusterDisplayName
+          value: {{ .location }}
