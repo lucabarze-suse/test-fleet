@@ -3,8 +3,4 @@ targetCustomizations:
   - name: all-clusters
     clusterSelector: {}
     values:
-      CLUSTER_ID: "${ .ClusterLabels.cluster-id }"
-      ENVIRONMENT: "${ .ClusterLabels.environment }"
-      REGION: "${ .ClusterLabels.region }"
-    templates:
-      - path: configmap.yaml  # Templating configmap.yaml to inject dynamic values
+      CLUSTER_ID: "${global.fleet.clusterLabels.cluster-id}"
