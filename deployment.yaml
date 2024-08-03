@@ -4,9 +4,9 @@ metadata:
   name: env-test
   labels:
     app: env-test
-    cluster-id: {{ .Vars.CLUSTER_ID }}
-    environment: {{ .Vars.ENVIRONMENT }}
-    region: {{ .Vars.REGION }}
+    cluster-id: "{{ .Vars.CLUSTER_ID }}"  # Enclose the variable in quotes
+    environment: "{{ .Vars.ENVIRONMENT }}"  # Enclose the variable in quotes
+    region: "{{ .Vars.REGION }}"  # Enclose the variable in quotes
 spec:
   replicas: 1
   selector:
@@ -16,8 +16,8 @@ spec:
     metadata:
       labels:
         app: env-test
-        environment: {{ .Vars.ENVIRONMENT }}
-        region: {{ .Vars.REGION }}
+        environment: "{{ .Vars.ENVIRONMENT }}"  # Enclose the variable in quotes
+        region: "{{ .Vars.REGION }}"  # Enclose the variable in quotes
     spec:
       containers:
       - name: busybox
@@ -25,9 +25,8 @@ spec:
         command: ["sh", "-c", "env && sleep 3600"]
         env:
         - name: CLUSTER_ID
-          value: {{ .Vars.CLUSTER_ID }}
+          value: "{{ .Vars.CLUSTER_ID }}"  # Enclose the variable in quotes
         - name: ENVIRONMENT
-          value: {{ .Vars.ENVIRONMENT }}
+          value: "{{ .Vars.ENVIRONMENT }}"  # Enclose the variable in quotes
         - name: REGION
-          value: {{ .Vars.REGION }}
-
+          value: "{{ .Vars.REGION }}"  # Enclose the variable in quotes
